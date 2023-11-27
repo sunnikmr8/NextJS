@@ -8,3 +8,6 @@ sudo apt-get purge nginx nginx-common
 
 # After executing any command from above, We can use this command to remove all dependencies used by nginx we don't need.
 sudo apt-get autoremove
+
+=====================================================================
+To install nginx on 
