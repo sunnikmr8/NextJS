@@ -1,0 +1,10 @@
+If already ngninx is installe and we want to uninstall it on ubuntu OS then we just need to write a command on console is as given below:
+
+# Removes all but config files.
+sudo apt-get remove nginx nginx-common
+
+# Removes everything.
+sudo apt-get purge nginx nginx-common
+
+# After executing any command from above, We can use this command to remove all dependencies used by nginx we don't need.
+sudo apt-get autoremove
