@@ -11,3 +11,50 @@ sudo apt-get autoremove
 
 =====================================================================
 To install nginx on 
+
+
+
+
+
+=====================================================================
+What if we face the error starting nginx server
+=====================================================================
+
+Job for nginx.service failed because the control process exited with error code.
+See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details.
+invoke-rc.d: initscript nginx, action "start" failed.
+× nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/lib/systemd/system/nginx.service; enabled; preset: enabled)
+     Active: failed (Result: exit-code) since Tue 2023-11-28 07:20:33 UTC; 15ms ago
+   Duration: 14min 37.212s
+       Docs: man:nginx(8)
+    Process: 748587 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=1/FAILURE)
+        CPU: 7ms
+
+Nov 28 07:20:33 ubuntu-s-2vcpu-4gb-amd-blr1-01 systemd[1]: Starting nginx.service - A high performance web server and a reverse proxy server...
+Nov 28 07:20:33 ubuntu-s-2vcpu-4gb-amd-blr1-01 nginx[748587]: 2023/11/28 07:20:33 [emerg] 748587#748587: invalid number of arguments in "fastcgi_param" directive in /etc/nginx/sites-enabled/nextjs:27
+Nov 28 07:20:33 ubuntu-s-2vcpu-4gb-amd-blr1-01 nginx[748587]: nginx: configuration file /etc/nginx/nginx.conf test failed
+Nov 28 07:20:33 ubuntu-s-2vcpu-4gb-amd-blr1-01 systemd[1]: nginx.service: Control process exited, code=exited, status=1/FAILURE
+Nov 28 07:20:33 ubuntu-s-2vcpu-4gb-amd-blr1-01 systemd[1]: nginx.service: Failed with result 'exit-code'.
+Nov 28 07:20:33 ubuntu-s-2vcpu-4gb-amd-blr1-01 systemd[1]: Failed to start nginx.service - A high performance web server and a reverse proxy server.
+
+----------------------++++++++++++++++++++++++
+
+If above error occurs the just hit some commands below to uninstall nginx properly then reinstall it.
+
+Maybe you can remove nginx first and reinstall it.
+
+List packages installed related to nginx, and remove them.
+
+dpkg --get-selections | grep nginx
+
+sudo apt --purge remove nginx
+sudo apt --purge remove nginx-common
+sudo apt --purge remove nginx-core
+And install nginx again
+
+sudo apt install nginx
+And now when I run systemctl status nginx, the service is active.
+
+=====================================================================
+=====================================================================
