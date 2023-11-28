@@ -1,0 +1,11 @@
+
+sudo apt update
+
+sudo apt install nodejs
+
+node -v
+
+Output:
+v18.13.0
+
+sudo apt install npm
