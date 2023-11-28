@@ -47,7 +47,6 @@ Maybe you can remove nginx first and reinstall it.
 List packages installed related to nginx, and remove them.
 
 dpkg --get-selections | grep nginx
-
 sudo apt --purge remove nginx
 sudo apt --purge remove nginx-common
 sudo apt --purge remove nginx-core
@@ -58,3 +57,33 @@ And now when I run systemctl status nginx, the service is active.
 
 =====================================================================
 =====================================================================
+vi /etc/nginx/conf.d/vetpet360.dev.conf
+
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        root /var/www/html;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+
+        location / {
+                try_files $uri $uri/ = 404;
+        }
+}
+
+Save it
+
+vi /etc/nginx/nginx.conf
+and comment the line 
+#include /etc/nginx/sites-enabled/*;
+
+run command to test and check if any syntax error -> nginx -t
+Output:
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+
+
+
+systemctl restart nginx
